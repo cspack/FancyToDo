@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">FancyToDos</string>
+    <string name="main_button_text">Add Item</string>
+    <string name="edit_item_below">Edit Item Below:</string>
+    <string name="save_button_label">Save</string>
+</resources>
