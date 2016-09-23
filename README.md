@@ -1,4 +1,4 @@
-# Pre-work - *Name of App Here*
+# Pre-work - *Fancy ToDo App*
 
 Fancy ToDo is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item, and marking items as done.
 
@@ -27,10 +27,11 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [X] Added checkboxes to mark Todo items.
+* [ ] Get a protobuf library to work well.
 
 ## Video Walkthrough 
 
-> TODO: Complete this
+> TODO: Complete this	
 Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
