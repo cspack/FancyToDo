@@ -34,7 +34,7 @@ The following **additional** features are implemented:
 > TODO: Complete this	
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/E8MoQLE.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<blockquote class="imgur-embed-pub" lang="en" data-id="E8MoQLE"><a href="//imgur.com/E8MoQLE">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 I apologize for the potato quality GIF. It was created with Silentcast, ffmpeg, and shrunk with GIMP (since I have Linux and not Mac or Windows).
 Will look for a better solution later.
