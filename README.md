@@ -31,12 +31,11 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough 
 
+> TODO: Complete this	
 Here's a walkthrough of implemented user stories:
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="E8MoQLE"><a href="//imgur.com/E8MoQLE">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<img src='http://i.imgur.com/JqrL2lz.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-I apologize for the potato quality GIF. It was created with Silentcast, ffmpeg, and shrunk with GIMP (since I have Linux and not Mac or Windows).
-Will look for a better solution later.
 
 ## Notes
 
@@ -44,7 +43,7 @@ Describe any challenges encountered while building the app.
 
 * Adding a checkbox to the note list caused all the item click handlers to stop registering events. A quick search found the solution was to set 'focusable' to false to the checkbox.
 * Androids Base64 class adds unnecessary line breaks which broke the file database (which splits by line). SQLite comes in the next commit.
-* Making a demo video is tricky on linux. :)
+* Making a demo video is tricky on linux, but licecap worked with Wine. :)
 * I had trouble registering event handlers with RecycleView, so I had to move event handlers into the RecycleView.Adapter, which is a very bad design pattern. After further digging I found that there is addOnItemTouchListener which I plan to attempt later.
 * Notify data set changed within event handlers causes exceptions with the UI thread. I moved to a delayed data set changes to a Runnable pattern.
 
