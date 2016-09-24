@@ -2,12 +2,14 @@ package com.cspack.todo1.todoapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 
@@ -21,14 +23,16 @@ import java.util.ArrayList;
    Adds a very weak checkbox implementation using files.
    This is not an efficient implementation and should be improved.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EditDialogFragment.EditDialogListener {
     private static final String TAG = "MainActivity";
     ArrayList<TodoNote> itemList;
     TodoNoteAdapter itemAdapter;
-    ListView lvItems;
+    RecyclerView rvItems;
+    LinearLayoutManager itemsLayoutManager;
+    EditText newItem;
     File todoFile;
     // Child activity result types.
-    private final int REQUEST_EDIT_ITEM = 1;
+    public static final int REQUEST_EDIT_ITEM = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +43,26 @@ public class MainActivity extends AppCompatActivity {
         todoFile = new File(getFilesDir(), "todo.txt");
         readItems();
 
+        itemAdapter = new TodoNoteAdapter(MainActivity.this, itemList);
+        itemsLayoutManager = new LinearLayoutManager(this);
+
         // Setup UI Elements.
-        lvItems = (ListView) findViewById(R.id.lvItems);
-        itemAdapter = new TodoNoteAdapter(this, itemList);
-        lvItems.setAdapter(itemAdapter);
-        setupListViewHandlers();
+        newItem = (EditText) findViewById(R.id.etNewItem);
+
+        rvItems = (RecyclerView) findViewById(R.id.rvItems);
+        rvItems.setHasFixedSize(true);
+        itemsLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvItems.setAdapter(itemAdapter);
+        rvItems.setLayoutManager(itemsLayoutManager);
+
+        itemAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                writeItems();
+            }
+        });
+        FloatingActionButton addButton = (FloatingActionButton) findViewById(R.id.btnAddItem);
+        addButton.setImageResource(R.drawable.ic_add_white_24dp);
     }
 
     @Override
@@ -54,33 +73,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "Invalid position sent for edit item: " + pos);
                 return;
             }
+            Log.d(TAG, "Updating note position " + pos);
             TodoNote note = (TodoNote) data.getSerializableExtra("note");
             itemList.set(pos, note);
             itemAdapter.notifyDataSetChanged();
-            writeItems();
         }
-    }
-
-    private void setupListViewHandlers() {
-        lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
-                                           long id) {
-                itemList.remove(position);
-                itemAdapter.notifyDataSetChanged();
-                writeItems();
-                return true;
-            }
-        });
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, EditActivity.class);
-                intent.putExtra("note", itemList.get(position));
-                intent.putExtra("pos", position);
-                startActivityForResult(intent, REQUEST_EDIT_ITEM);
-            }
-        });
     }
 
     // Read items into itemList from todoFile.
@@ -112,15 +109,33 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void handleAddItem(View view) {
-        // Do nothing.
-        EditText newItem = (EditText) findViewById(R.id.etNewItem);
-        itemList.add(new TodoNote(false, newItem.getText().toString(), TodoNote.Priority.MEDIUM));
+        String itemText = newItem.getText().toString();
+
+        if (itemText.isEmpty()) {
+            Toast.makeText(getApplicationContext(), R.string.note_text_missing, Toast.LENGTH_SHORT)
+                    .show();
+            return;
+        }
+
+        itemList.add(new TodoNote(/*completed=*/false, itemText, TodoNote.Priority.MEDIUM));
+        itemAdapter.delayedNotifyDataSetChanged();
         newItem.setText("");
+
+        rvItems.smoothScrollToPosition(itemAdapter.getItemCount());
+
+    }
+
+    @Override
+    public void onFinishEditItem(TodoNote note, int position) {
+        if (position < 0 || position >= itemList.size()) {
+            Log.e(TAG, "Invalid position sent for edit item: " + position);
+            return;
+        }
+        Log.d(TAG, "Updating note position " + position);
+        itemList.set(position, note);
         itemAdapter.notifyDataSetChanged();
-        writeItems();
     }
 }

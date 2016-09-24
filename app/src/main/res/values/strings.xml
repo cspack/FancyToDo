@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">FancyToDos</string>
+    <string name="app_name">Fancy ToDos</string>
+    <string name="editor_title">Edit ToDo Note</string>
     <string name="main_button_text">Add Item</string>
-    <string name="edit_item_below">Edit Item Below:</string>
+    <string name="edit_item_below">Rename to-do note:</string>
+    <string name="create_new_entry">Create new entry</string>
     <string name="save_button_label">Save</string>
+    <string name="note_text_missing">Item text missing</string>
+    <string name="set_priority">Change priority:</string>
+    <string name="priority_high">High</string>
+    <string name="priority_medium">Medium</string>
+    <string name="priority_low">Low</string>
 </resources>

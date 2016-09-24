@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    card_view:cardElevation="2dp"
+    card_view:contentPadding="8dp"
+    android:layout_margin="4dp">
 
-    <CheckBox
-        android:id="@+id/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        />
-
-    <TextView
-        android:id="@+id/text1"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textSize="18sp"
-        android:text="@string/app_name"
-        android:textAlignment="viewStart"
-        android:fontFamily="casual"
-        android:textStyle="normal|bold"
-        />
-</LinearLayout>
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_margin="4dp"
+            />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:text="@string/app_name"
+            android:fontFamily="casual"
+            android:textStyle="normal|bold"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/checkbox"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPriority"
+            android:layout_weight="1"
+            android:text="Priority"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/color_high_priority"
+            android:textStyle="normal|bold"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

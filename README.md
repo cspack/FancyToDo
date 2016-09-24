@@ -4,8 +4,7 @@ Fancy ToDo is an android app that allows building a todo list and basic todo ite
 
 Submitted by: Chris Spack
 
-Time spent: 4 hours spent in total
-(As of 2016/9/23)
+Time spent: 9 hours spent in total
 
 ## User Stories
 
@@ -20,23 +19,25 @@ The following **optional** features are implemented:
 * [ ] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
 * [X] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
 * [ ] Add support for completion due dates for todo items (and display within listview item)
-* [ ] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
-* [ ] Add support for selecting the priority of each todo item (and display in listview item)
-* [ ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
+* [X] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
+* [X] Add support for selecting the priority of each todo item (and display in listview item)
+* [X] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
 The following **additional** features are implemented:
 
 * [X] Added checkboxes to mark Todo items.
-* [ ] Get a protobuf library to work well.
+* [X] Added material design elements (RecyclerView, CardView, FloatingActionButton and TextInputLayout).
+
 
 ## Video Walkthrough 
 
 > TODO: Complete this	
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/E8MoQLE.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF **not** created with [LiceCap](http://www.cockos.com/licecap/) (I use linux).
+I apologize for the potato quality GIF. It was created with Silentcast, ffmpeg, and shrunk with GIMP (since I have Linux and not Mac or Windows).
+Will look for a better solution later.
 
 ## Notes
 
@@ -44,6 +45,9 @@ Describe any challenges encountered while building the app.
 
 * Adding a checkbox to the note list caused all the item click handlers to stop registering events. A quick search found the solution was to set 'focusable' to false to the checkbox.
 * Androids Base64 class adds unnecessary line breaks which broke the file database (which splits by line). SQLite comes in the next commit.
+* Making a demo video is tricky on linux. :)
+* I had trouble registering event handlers with RecycleView, so I had to move event handlers into the RecycleView.Adapter, which is a very bad design pattern. After further digging I found that there is addOnItemTouchListener which I plan to attempt later.
+* Notify data set changed within event handlers causes exceptions with the UI thread. I moved to a delayed data set changes to a Runnable pattern.
 
 ## License
 

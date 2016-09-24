@@ -40,6 +40,32 @@ public class TodoNote implements Serializable {
         return this.priority;
     }
 
+    public int getPriorityTextRes() {
+        switch (this.priority) {
+            case HIGH:
+                return R.string.priority_high;
+            case MEDIUM:
+                return R.string.priority_medium;
+            case LOW:
+                return R.string.priority_low;
+        }
+        Log.e(TAG, "Unknown priority Id requested");
+        return 0;
+    }
+
+    public int getPriorityColorRes() {
+        switch (this.priority) {
+            case HIGH:
+                return R.color.color_high_priority;
+            case MEDIUM:
+                return R.color.color_med_priority;
+            case LOW:
+                return R.color.color_low_priority;
+        }
+        Log.e(TAG, "Unknown priority Id requested");
+        return 0;
+    }
+
     public String getText() {
         return this.text;
     }
