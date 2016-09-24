@@ -31,7 +31,6 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough 
 
-> TODO: Complete this	
 Here's a walkthrough of implemented user stories:
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="E8MoQLE"><a href="//imgur.com/E8MoQLE">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
