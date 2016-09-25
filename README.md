@@ -16,7 +16,8 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-* [ ] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
+* [X] Persist the todo items [into SQLite](http://guides.codepath
+.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
 * [X] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
 * [ ] Add support for completion due dates for todo items (and display within listview item)
 * [X] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
@@ -27,14 +28,15 @@ The following **additional** features are implemented:
 
 * [X] Added checkboxes to mark Todo items.
 * [X] Added material design elements (RecyclerView, CardView, FloatingActionButton and TextInputLayout).
-
+* [X] Added the ability to swipe away item cards, which also provides pretty animation of the list
+view!
 
 ## Video Walkthrough 
 
-> TODO: Complete this	
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/JqrL2lz.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/DGm21id.gif' title='Video Walkthrough' width='' alt='Video
+Walkthrough' />
 
 
 ## Notes
@@ -46,6 +48,8 @@ Describe any challenges encountered while building the app.
 * Making a demo video is tricky on linux, but licecap worked with Wine. :)
 * I had trouble registering event handlers with RecycleView, so I had to move event handlers into the RecycleView.Adapter, which is a very bad design pattern. After further digging I found that there is addOnItemTouchListener which I plan to attempt later.
 * Notify data set changed within event handlers causes exceptions with the UI thread. I moved to a delayed data set changes to a Runnable pattern.
+* Most of my problems with data observation set were solved by refactoring to the TodoNoteDatabase
+wrapper, which used an ObservableList pattern.
 
 ## License
 

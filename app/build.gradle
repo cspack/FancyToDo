@@ -4,6 +4,9 @@ apply plugin: 'com.google.protobuf'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.cspack.todo1.todoapp"
         minSdkVersion 21

@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * Created by chris on 9/23/16.
+ * TodoNote data handler. Provides helpers for serializing and associating with Android resources.
  */
 
 public class TodoNote implements Serializable {
@@ -22,16 +22,21 @@ public class TodoNote implements Serializable {
         HIGH,
     }
 
+    private long id;
     private boolean completed;
     private String text;
     private Priority priority;
 
-    public TodoNote(boolean completed, String text, Priority priority) {
+    public TodoNote(long id, boolean completed, String text, Priority priority) {
+        this.id = id;
         this.completed = completed;
         this.text = text;
         this.priority = priority;
     }
 
+    public long getId() {
+        return id;
+    }
     public boolean getCompleted() {
         return this.completed;
     }
@@ -109,6 +114,11 @@ public class TodoNote implements Serializable {
             Log.e(TAG, "Base64 decode error from " + serializedNote);
             return null;
         }
+    }
 
+    @Override
+    public String toString() {
+        return String.format("{id: %1d, text: '%2s', priority: '%3s', completed: '%4s'}", id, text,
+                priority.toString(), completed);
     }
 }

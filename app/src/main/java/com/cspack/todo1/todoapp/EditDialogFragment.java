@@ -15,16 +15,15 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 /**
- * Created by chris on 9/23/16.
+ * Editor Fragment for TodoNote.
  */
 
 public class EditDialogFragment extends DialogFragment {
     public interface EditDialogListener {
-        void onFinishEditItem(TodoNote note, int position);
+        void onFinishEditNote(int position, TodoNote note);
     }
 
     TodoNote note;
-
     EditText editText;
     Button saveButton;
 
@@ -114,7 +113,7 @@ public class EditDialogFragment extends DialogFragment {
 
         final int pos = getArguments().getInt("pos", -1);
         EditDialogListener listener = (EditDialogListener) getActivity();
-        listener.onFinishEditItem(note, pos);
+        listener.onFinishEditNote(pos, note);
         dismiss();
     }
 }
