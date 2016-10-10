@@ -12,15 +12,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.cspack.todo1.todoapp.activities.MainActivity;
+import com.cspack.todo1.todoapp.db.TodoNoteDatabase;
+import com.cspack.todo1.todoapp.fragments.EditDialogFragment;
+import com.cspack.todo1.todoapp.models.TodoNote;
+
 /**
  * RecyclerView adapter which will handle actions on the Note list in MainActivity.
  */
 
 public class TodoNoteAdapter extends RecyclerView.Adapter<TodoNoteAdapter.ViewHolder> {
     public static final String TAG = "TodoNoteAdapter";
-    private MainActivity mActivity;
-    protected ObservableList<TodoNote> mItems;
-
     // Callback to register this RecyclerView Adapter with the database Observable list.
     final ObservableList.OnListChangedCallback changeCallback = new ObservableList
             .OnListChangedCallback<ObservableList<TodoNote>>() {
@@ -53,35 +55,12 @@ public class TodoNoteAdapter extends RecyclerView.Adapter<TodoNoteAdapter.ViewHo
             TodoNoteAdapter.this.notifyItemRangeRemoved(start, count);
         }
     };
+    protected ObservableList<TodoNote> mItems;
+    private MainActivity mActivity;
 
     public TodoNoteAdapter(MainActivity activity, ObservableList<TodoNote> items) {
         this.mActivity = activity;
         this.mItems = items;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final View mMainView;
-        private final CheckBox mCheckBox;
-        private final TextView tvText;
-        private final TextView tvPriority;
-        private TodoNote mNote = null;
-
-        public ViewHolder(View v) {
-            super(v);
-            mMainView = v;
-            mCheckBox = (CheckBox) v.findViewById(R.id.checkbox);
-            tvText = (TextView) v.findViewById(R.id.text1);
-            tvPriority = (TextView) v.findViewById(R.id.tvPriority);
-        }
-
-        public void bindNote(TodoNote note) {
-            mNote = note;
-        }
-
-        @Nullable
-        public TodoNote getNote() {
-            return mNote;
-        }
     }
 
     @Override
@@ -149,5 +128,30 @@ public class TodoNoteAdapter extends RecyclerView.Adapter<TodoNoteAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final View mMainView;
+        private final CheckBox mCheckBox;
+        private final TextView tvText;
+        private final TextView tvPriority;
+        private TodoNote mNote = null;
+
+        public ViewHolder(View v) {
+            super(v);
+            mMainView = v;
+            mCheckBox = (CheckBox) v.findViewById(R.id.checkbox);
+            tvText = (TextView) v.findViewById(R.id.text1);
+            tvPriority = (TextView) v.findViewById(R.id.tvPriority);
+        }
+
+        public void bindNote(TodoNote note) {
+            mNote = note;
+        }
+
+        @Nullable
+        public TodoNote getNote() {
+            return mNote;
+        }
     }
 }

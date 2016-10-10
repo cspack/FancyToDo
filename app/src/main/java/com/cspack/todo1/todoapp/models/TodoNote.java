@@ -1,7 +1,9 @@
-package com.cspack.todo1.todoapp;
+package com.cspack.todo1.todoapp.models;
 
 import android.util.Base64;
 import android.util.Log;
+
+import com.cspack.todo1.todoapp.R;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,23 +17,30 @@ import java.io.Serializable;
 
 public class TodoNote implements Serializable {
     protected static final String TAG = "TodoNote";
-
-    public enum Priority {
-        LOW,
-        MEDIUM,
-        HIGH,
-    }
-
     private long id;
     private boolean completed;
     private String text;
     private Priority priority;
-
     public TodoNote(long id, boolean completed, String text, Priority priority) {
         this.id = id;
         this.completed = completed;
         this.text = text;
         this.priority = priority;
+    }
+
+    // Static helper to construct a TodoNote from a base64 string.
+    public static TodoNote FromBase64String(String serializedNote) {
+        try {
+            byte b[] = Base64.decode(serializedNote, Base64.NO_WRAP);
+            ByteArrayInputStream bi = new ByteArrayInputStream(b);
+            ObjectInputStream si = new ObjectInputStream(bi);
+            TodoNote note = (TodoNote) si.readObject();
+            return note;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, "Base64 decode error from " + serializedNote);
+            return null;
+        }
     }
 
     public long getId() {
@@ -41,8 +50,16 @@ public class TodoNote implements Serializable {
         return this.completed;
     }
 
+    public void setCompleted(boolean isCompleted) {
+        this.completed = isCompleted;
+    }
+
     public Priority getPriority() {
         return this.priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public int getPriorityTextRes() {
@@ -75,14 +92,6 @@ public class TodoNote implements Serializable {
         return this.text;
     }
 
-    public void setCompleted(boolean isCompleted) {
-        this.completed = isCompleted;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
-
     public void setText(String text) {
         this.text = text;
     }
@@ -101,24 +110,15 @@ public class TodoNote implements Serializable {
         }
     }
 
-    // Static helper to construct a TodoNote from a base64 string.
-    public static TodoNote FromBase64String(String serializedNote) {
-        try {
-            byte b[] = Base64.decode(serializedNote, Base64.NO_WRAP);
-            ByteArrayInputStream bi = new ByteArrayInputStream(b);
-            ObjectInputStream si = new ObjectInputStream(bi);
-            TodoNote note = (TodoNote) si.readObject();
-            return note;
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(TAG, "Base64 decode error from " + serializedNote);
-            return null;
-        }
-    }
-
     @Override
     public String toString() {
         return String.format("{id: %1d, text: '%2s', priority: '%3s', completed: '%4s'}", id, text,
                 priority.toString(), completed);
+    }
+
+    public enum Priority {
+        LOW,
+        MEDIUM,
+        HIGH,
     }
 }

@@ -1,4 +1,4 @@
-package com.cspack.todo1.todoapp;
+package com.cspack.todo1.todoapp.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.util.Log;
+
+import com.cspack.todo1.todoapp.models.TodoNote;
 
 import java.util.List;
 

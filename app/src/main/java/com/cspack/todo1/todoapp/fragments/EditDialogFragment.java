@@ -1,4 +1,4 @@
-package com.cspack.todo1.todoapp;
+package com.cspack.todo1.todoapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,15 +14,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.cspack.todo1.todoapp.R;
+import com.cspack.todo1.todoapp.models.TodoNote;
+
 /**
  * Editor Fragment for TodoNote.
  */
 
 public class EditDialogFragment extends DialogFragment {
-    public interface EditDialogListener {
-        void onFinishEditNote(int position, TodoNote note);
-    }
-
     TodoNote note;
     EditText editText;
     Button saveButton;
@@ -115,6 +114,10 @@ public class EditDialogFragment extends DialogFragment {
         EditDialogListener listener = (EditDialogListener) getActivity();
         listener.onFinishEditNote(pos, note);
         dismiss();
+    }
+
+    public interface EditDialogListener {
+        void onFinishEditNote(int position, TodoNote note);
     }
 }
 
